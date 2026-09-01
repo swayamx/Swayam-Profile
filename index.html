@@ -436,26 +436,26 @@ img {
 
 
 
-/* Header & Navbar */
+/* Header & Navbar - Sticky Fixed Top */
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 14px 0;
-  background: rgba(255, 255, 255, 0.92);
+  padding: 12px 0;
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 header.scrolled {
-  padding: 10px 0;
   background: rgba(255, 255, 255, 0.98);
   border-bottom-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
 }
 
 .nav-container {
@@ -1174,6 +1174,32 @@ header.scrolled {
   z-index: -1;
   opacity: 0.9;
   border-radius: 2px;
+}
+
+/* Name Highlighting Everywhere */
+.highlight-name {
+  color: var(--dark-gray);
+  font-weight: 800;
+  position: relative;
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 6px;
+  background-color: var(--base-color);
+  box-shadow: 0 2px 12px rgba(190, 255, 1, 0.45);
+  transition: all 0.25s ease;
+}
+
+.highlight-name:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 18px rgba(190, 255, 1, 0.7);
+}
+
+.highlight-name-subtle {
+  font-weight: 800;
+  color: var(--dark-gray);
+  background: linear-gradient(120deg, rgba(190, 255, 1, 0.25) 0%, rgba(190, 255, 1, 0.85) 100%);
+  padding: 1px 6px;
+  border-radius: 4px;
 }
 
 .about-image-col {
@@ -2103,11 +2129,8 @@ footer {
 }
 
 @media (max-width: 991px) {
-  header {
-    padding: 12px 0;
-  }
-  header.scrolled {
-    padding: 8px 0;
+  header, header.scrolled {
+    padding: 10px 0;
   }
   .header-menu-col, .header-button-col .btn {
     display: none;
@@ -2223,7 +2246,7 @@ footer {
               SJR<span>.</span>
             </div>
             <div class="brand-name-text">
-              <span class="brand-main-title">Swayam Jyoti Routray</span>
+              <span class="brand-main-title"><span class="highlight-name" style="padding: 1px 6px; font-size: 15px; margin-right: 2px;">Swayam</span> Jyoti Routray</span>
               <span class="brand-sub-title">Software Developer &amp; ML Engineer</span>
             </div>
           </a>
@@ -2303,7 +2326,7 @@ footer {
     <div class="mobile-drawer-top">
       <div style="display: flex; align-items: center; gap: 10px;">
         <div class="brand-monogram-box" style="width: 38px; height: 38px; font-size: 16px;">SJR<span>.</span></div>
-        <span style="font-weight: 800; color: var(--dark-gray); font-size: 16px;">Swayam Jyoti</span>
+        <span style="font-weight: 800; color: var(--dark-gray); font-size: 16px;"><span class="highlight-name" style="padding: 1px 6px; font-size: 14px; margin-right: 2px;">Swayam</span> Jyoti</span>
       </div>
       <button class="mobile-close-btn" id="mobileCloseBtn"><i class="fa-solid fa-xmark"></i></button>
     </div>
@@ -2346,7 +2369,7 @@ footer {
         </div>
 
         <p class="hero-description reveal-animate">
-          Hi, I'm <strong>Swayam Jyoti Routray</strong>. I craft high-performance software at the intersection of clean architecture, machine learning intelligence, distributed backends, and real-time IoT hardware.
+          Hi, I'm <span class="highlight-name">Swayam Jyoti Routray</span>. I craft high-performance software at the intersection of clean architecture, machine learning intelligence, distributed backends, and real-time IoT hardware.
         </p>
 
         <!-- CTA Buttons -->
@@ -2426,7 +2449,7 @@ footer {
             </div>
             <h2 class="about-headline kinetic-heading">Weaving <span class="highlight-neon">algorithms</span> into scalable digital <span class="highlight-neon">experiences.</span></h2>
             <p class="about-body-text reveal-animate">
-              I am <strong>Swayam Jyoti Routray</strong> — a Software Developer and Machine Learning Engineer driven by a commitment to writing clean, reliable, and high-performance code. During my tenure as a <span class="text-highlight">Software Development Engineer Intern at Tata Consultancy Services (TCS)</span>, I engineered end-to-end ML data pipelines, optimizing predictive model accuracy and streamlining high-throughput data processing.
+              I am <span class="highlight-name">Swayam Jyoti Routray</span> — a Software Developer and Machine Learning Engineer driven by a commitment to writing clean, reliable, and high-performance code. During my tenure as a <span class="text-highlight">Software Development Engineer Intern at Tata Consultancy Services (TCS)</span>, I engineered end-to-end ML data pipelines, optimizing predictive model accuracy and streamlining high-throughput data processing.
             </p>
             <p class="about-body-text reveal-animate">
               My engineering work spans autonomous industrial safety wearables (Safe-T), real-time school transit fleet tracking, AI network defense systems (NetGuardX), WebRTC video collaboration suites, and gesture-controlled IoT robotics.
@@ -2907,7 +2930,7 @@ footer {
                 <h5 class="testimonial-text">
                   "Simplicity and clean architecture are prerequisites for <span class="text-underline-accent">reliability.</span> Building scalable ML pipelines that solve real-world problems is my core drive."
                 </h5>
-                <span class="testimonial-author">@ Swayam Jyoti Routray</span>
+                <span class="testimonial-author">@ <span class="highlight-name" style="padding: 1px 8px; font-size: 14px;">Swayam Jyoti Routray</span></span>
               </div>
 
               <!-- Slide 2 -->
@@ -3071,7 +3094,7 @@ footer {
           <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="footer-copyright-text">
-          &copy; 2026 Swayam Jyoti Routray — Software Developer &amp; ML Engineer
+          &copy; 2026 <span class="highlight-name" style="padding: 2px 8px;">Swayam Jyoti Routray</span> — Software Developer &amp; ML Engineer
         </div>
       </div>
     </div>

@@ -283,12 +283,15 @@ img {
 .btn-double-text-wrap {
   display: flex;
   flex-direction: column;
-  height: 20px;
+  height: 22px;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .btn-double-text-wrap span {
   display: block;
+  white-space: nowrap;
+  line-height: 22px;
   transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
@@ -440,15 +443,18 @@ header {
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 24px 0;
-  transition: var(--transition);
+  padding: 14px 0;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 header.scrolled {
-  padding: 14px 0;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06);
 }
 
@@ -456,6 +462,11 @@ header.scrolled {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
+}
+
+.header-logo-col {
+  flex-shrink: 0;
 }
 
 .navbar-brand {
@@ -463,22 +474,25 @@ header.scrolled {
   align-items: center;
   gap: 12px;
   text-decoration: none;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .brand-monogram-box {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   background-color: var(--dark-gray);
   color: #fff;
-  border-radius: 12px;
-  font-size: 20px;
+  border-radius: 10px;
+  font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.5px;
   position: relative;
   transition: var(--transition);
+  flex-shrink: 0;
 }
 
 .brand-monogram-box span {
@@ -488,37 +502,49 @@ header.scrolled {
 .brand-name-text {
   display: flex;
   flex-direction: column;
+  white-space: nowrap;
 }
 
 .brand-main-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--dark-gray);
-  line-height: 1.1;
-  letter-spacing: -0.5px;
+  line-height: 1.15;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
 }
 
 .brand-sub-title {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--medium-gray);
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .navbar-brand:hover .brand-monogram-box {
   background-color: var(--base-color);
   color: var(--dark-gray);
-  transform: rotate(-8deg) scale(1.05);
+  transform: rotate(-6deg) scale(1.05);
 }
 .navbar-brand:hover .brand-monogram-box span {
   color: var(--dark-gray);
 }
 
+.header-menu-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 34px;
+  gap: clamp(14px, 1.8vw, 28px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .nav-item {
@@ -526,13 +552,19 @@ header.scrolled {
 }
 
 .nav-link {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--dark-gray);
   padding: 6px 0;
   display: inline-flex;
   align-items: center;
   position: relative;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover, .nav-item.active .nav-link {
+  color: #000;
 }
 
 .nav-link::after {
@@ -622,7 +654,16 @@ header.scrolled {
 .header-button-col {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.header-button-col .btn {
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Mobile Toggler */
@@ -2030,6 +2071,22 @@ footer {
 }
 
 /* Responsive Queries */
+@media (max-width: 1280px) {
+  .brand-sub-title {
+    display: none;
+  }
+  .nav-menu {
+    gap: 16px;
+  }
+  .nav-link {
+    font-size: 14px;
+  }
+  .header-button-col .btn {
+    padding: 8px 18px;
+    font-size: 13.5px;
+  }
+}
+
 @media (max-width: 1200px) {
   .services-row {
     grid-template-columns: repeat(2, 1fr);
@@ -2046,6 +2103,12 @@ footer {
 }
 
 @media (max-width: 991px) {
+  header {
+    padding: 12px 0;
+  }
+  header.scrolled {
+    padding: 8px 0;
+  }
   .header-menu-col, .header-button-col .btn {
     display: none;
   }

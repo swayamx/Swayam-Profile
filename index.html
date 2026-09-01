@@ -2300,9 +2300,166 @@ footer {
     justify-content: center;
   }
 }
-  </style>
+  
+/* Hi Everyone - Intro Splash Screen */
+.intro-splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #161719;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.85s ease;
+  overflow: hidden;
+}
+
+.intro-splash-screen.loaded {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.intro-splash-content {
+  text-align: center;
+  color: #fff;
+  padding: 40px 24px;
+  max-width: 620px;
+  width: 100%;
+}
+
+.intro-wave-icon {
+  font-size: 58px;
+  display: inline-block;
+  animation: waveHand 2.2s ease-in-out infinite;
+  transform-origin: 70% 70%;
+  margin-bottom: 18px;
+}
+
+@keyframes waveHand {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(16deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(16deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(12deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.intro-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 7vw, 68px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.intro-title span {
+  color: var(--base-color);
+}
+
+.intro-subtitle {
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: #d1d5db;
+  margin-bottom: 35px;
+  line-height: 1.6;
+}
+
+.intro-loader-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 320px;
+  margin: 0 auto 28px auto;
+}
+
+.intro-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.intro-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--base-color);
+  box-shadow: 0 0 14px var(--base-color);
+  transition: width 0.05s linear;
+}
+
+.intro-percent-text {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--base-color);
+  min-width: 44px;
+}
+
+.intro-enter-btn {
+  background: var(--base-color);
+  color: var(--dark-gray);
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  border-radius: 100px;
+  padding: 13px 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 10px 25px rgba(190, 255, 1, 0.35);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.intro-enter-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.intro-enter-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 35px rgba(190, 255, 1, 0.6);
+}
+</style>
 </head>
 <body>
+
+  <!-- Interactive "Hi Everyone!" Launch Intro Splash Screen -->
+  <div id="intro-splash-screen" class="intro-splash-screen" aria-label="Welcome Introduction">
+    <div class="intro-splash-content">
+      <div class="intro-wave-icon">ðŸ‘‹</div>
+      <h2 class="intro-title">Hi Everyone<span>!</span></h2>
+      <p class="intro-subtitle">
+        Welcome to the digital portfolio of <span class="highlight-name" style="color: #1c1d1f; padding: 2px 8px;">Swayam Jyoti Routray</span><br>
+        <span style="font-size: 14px; color: #9ca3af;">Software Developer &amp; ML Engineer</span>
+      </p>
+      
+      <div class="intro-loader-wrap">
+        <div class="intro-progress-bar">
+          <div class="intro-progress-fill" id="introProgressFill"></div>
+        </div>
+        <span class="intro-percent-text" id="introPercentText">0%</span>
+      </div>
+
+      <div>
+        <button class="intro-enter-btn" id="introEnterBtn">
+          <span>Explore Portfolio</span> <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Custom Magnetic Frosted Cursor Elements -->
   <div id="custom-cursor-circle"></div>
@@ -3583,6 +3740,35 @@ document.addEventListener('DOMContentLoaded', () => {
     startAuto();
   }
 
+  // 11. Interactive "Hi Everyone!" Preloader Launch Controller
+  const splash = document.getElementById('intro-splash-screen');
+  const fill = document.getElementById('introProgressFill');
+  const percentText = document.getElementById('introPercentText');
+  const enterBtn = document.getElementById('introEnterBtn');
+
+  let count = 0;
+  const timer = setInterval(() => {
+    count += 3;
+    if (count > 100) count = 100;
+    if (fill) fill.style.width = count + '%';
+    if (percentText) percentText.textContent = count + '%';
+
+    if (count >= 100) {
+      clearInterval(timer);
+      if (enterBtn) enterBtn.classList.add('visible');
+      setTimeout(() => {
+        if (splash && !splash.classList.contains('loaded')) {
+          splash.classList.add('loaded');
+        }
+      }, 750);
+    }
+  }, 22);
+
+  if (enterBtn) {
+    enterBtn.addEventListener('click', () => {
+      if (splash) splash.classList.add('loaded');
+    });
+  }
 });
   </script>
 </body>

@@ -1486,16 +1486,22 @@ header.scrolled {
 
 .spinning-badge-container {
   position: absolute;
-  top: -50px;
+  top: -45px;
   right: -90px;
-  width: 140px;
-  height: 140px;
+  width: 145px;
+  height: 145px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
 }
 
 .badge-ring-rotate {
   width: 100%;
   height: 100%;
-  animation: badgeSpinInfinite 16s linear infinite;
+  animation: badgeSpinInfinite 18s linear infinite;
+  transform-origin: center center;
+  overflow: visible;
 }
 
 .badge-center-icon {
@@ -1503,17 +1509,24 @@ header.scrolled {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 46px;
-  height: 46px;
+  width: 52px;
+  height: 52px;
   background: var(--dark-gray);
   color: var(--base-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 17px;
-  font-weight: 800;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  border: 2px solid rgba(190, 255, 1, 0.5);
+  z-index: 2;
+}
+
+.badge-center-icon span {
+  color: #fff;
 }
 
 .portfolio-grid-layout {
@@ -2893,8 +2906,17 @@ footer {
             <div class="portfolio-watermark parallax-watermark" data-speed="0.2">projects</div>
             <!-- Rotating Badge Element -->
             <div class="spinning-badge-container">
-              <img src="https://crafto.themezaa.com/web-agency/wp-content/uploads/sites/32/2024/03/demo-web-agency-03.png" class="badge-ring-rotate" alt="SJR Badge Ring">
-              <div class="badge-center-icon">SJR</div>
+              <svg class="badge-ring-rotate" viewBox="0 0 160 160" width="145" height="145">
+                <defs>
+                  <path id="badgePath1" d="M 80, 80 m -56, 0 a 56,56 0 1,1 112,0 a 56,56 0 1,1 -112,0" />
+                </defs>
+                <text font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" fill="#1C1D1F" letter-spacing="2.2">
+                  <textPath href="#badgePath1" startOffset="0%">
+                    ✦ SWAYAM JYOTI ROUTRAY ✦ SOFTWARE DEVELOPER &amp; ML ✦
+                  </textPath>
+                </text>
+              </svg>
+              <div class="badge-center-icon">SJR<span>.</span></div>
             </div>
           </div>
           <div class="portfolio-btn-wrap reveal-animate">
@@ -3329,8 +3351,17 @@ footer {
             build.
             <!-- Rotating Badge Element -->
             <div class="cta-spinning-badge-container">
-              <img src="https://crafto.themezaa.com/web-agency/wp-content/uploads/sites/32/2024/03/demo-web-agency-05.png" class="badge-ring-rotate" alt="Crafto Badge Ring">
-              <div class="badge-center-icon" style="background: var(--dark-gray); color: var(--base-color); width: 48px; height: 48px; font-size: 15px;">SJR</div>
+              <svg class="badge-ring-rotate" viewBox="0 0 160 160" width="130" height="130">
+                <defs>
+                  <path id="badgePath2" d="M 80, 80 m -56, 0 a 56,56 0 1,1 112,0 a 56,56 0 1,1 -112,0" />
+                </defs>
+                <text font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" fill="#1C1D1F" letter-spacing="2.2">
+                  <textPath href="#badgePath2" startOffset="0%">
+                    ✦ AVAILABLE FOR ROLES ✦ LET'S WORK TOGETHER ✦
+                  </textPath>
+                </text>
+              </svg>
+              <div class="badge-center-icon" style="background: var(--dark-gray); color: var(--base-color); width: 48px; height: 48px; font-size: 15px;">SJR<span>.</span></div>
             </div>
           </div>
         </div>
